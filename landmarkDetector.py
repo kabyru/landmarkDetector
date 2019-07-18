@@ -47,28 +47,28 @@ vs = VideoStream().start()
 while True:
     frame = vs.read()
     frame = imutils.resize(frame, width=800)
-    gray = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
+    grayScale = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
 
-    rects = detector(gray, 0)
+    actionPoints = detector(grayScale, 0)
     #Loop over face detections
-    for rect in rects:
-        shape = predictor(gray, rect)
-        shape = face_utils.shape_to_np(shape) #REAL-TIME NUMPY ARRAY OF DECTECTED COORDS
+    for actionPoint in actionPoints:
+        pointArray = predictor(grayScale, actionPoint)
+        pointArray = face_utils.shape_to_np(pointArray) #REAL-TIME NUMPY ARRAY OF DECTECTED COORDS
         #print(shape)
 
         #loop over x,y coords and draw on image
         dotCount = 0
-        for (x, y) in shape: #add text to each circle
+        for (x, y) in pointArray: #add text to each circle
             cv2.circle(frame, (x, y), 1, (0, 0, 255), -1)
             cv2.putText(frame, str(dotCount), (x, y), font, 0.5, (0,255,0), 2, cv2.LINE_AA)
             dotCount += 1
     cv2.imshow("Frame", frame)
-    key = cv2.waitKey(1) & 0xFF
+    keyPress = cv2.waitKey(1) & 0xFF
 
     #time.sleep(1)
 
     #Q will exit program
-    if key == ord("q"):
+    if keyPress == ord("q"):
         break
 
 #Cleanup and destroy windows
