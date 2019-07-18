@@ -28,17 +28,16 @@ import cv2
 font = cv2.FONT_HERSHEY_SIMPLEX
 
 #Parse the input arguments
-ap = argparse.ArgumentParser()
-ap.add_argument("-p", "--shape-predictor", required = True, help = "Path to facial landmark predictor")
+# ap = argparse.ArgumentParser()
 # ap.add_argument("-r", "--picamera", type=int, default=-1, help = "Which camera should be used")
-args = vars(ap.parse_args())
+# args = vars(ap.parse_args())
 
 #Shape Predictor should be the path to dlibs pre-trained facial landmark predictor...
 
 #Initialize dlib's HOG-based face detector and load facial predictor
 print("Loading facial landmark predictor...")
 detector = dlib.get_frontal_face_detector()
-predictor = dlib.shape_predictor(args["shape_predictor"])
+predictor = dlib.shape_predictor("shape_predictor_68_face_landmarks.dat")
 
 #Initialize VideoStream
 print("Initializing camera stream...")
