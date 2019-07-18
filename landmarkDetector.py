@@ -27,11 +27,6 @@ import cv2
 
 font = cv2.FONT_HERSHEY_SIMPLEX
 
-#Parse the input arguments
-# ap = argparse.ArgumentParser()
-# ap.add_argument("-r", "--picamera", type=int, default=-1, help = "Which camera should be used")
-# args = vars(ap.parse_args())
-
 #Shape Predictor should be the path to dlibs pre-trained facial landmark predictor...
 
 #Initialize dlib's HOG-based face detector and load facial predictor
@@ -56,9 +51,9 @@ while True:
         pointArray = face_utils.shape_to_np(pointArray) #REAL-TIME NUMPY ARRAY OF DECTECTED COORDS
         #print(shape)
 
-        #loop over x,y coords and draw on image
+        #Loop over x,y coords and draw on image
         dotCount = 0
-        for (x, y) in pointArray: #add text to each circle
+        for (x, y) in pointArray: #Add text to each circle
             cv2.circle(frame, (x, y), 1, (0, 0, 255), -1)
             cv2.putText(frame, str(dotCount), (x, y), font, 0.5, (0,255,0), 2, cv2.LINE_AA)
             dotCount += 1
